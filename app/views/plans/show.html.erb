@@ -1,0 +1,41 @@
+<div class="swiper">
+  <div class="swiper-wrapper">
+    <% if @plan.plan_images.attached? %>
+      <% @plan.plan_images.each do |image| %>
+      <div class="swiper-slide">
+        <%= image_tag image, size: '200x200' %>
+      </div>
+      <% end %>
+    <% end %>
+  </div>
+  <!-- ページネーションの要素 -->
+   <div class="swiper-pagination"></div>
+   <!-- ナビゲーションボタン （前、次） -->
+   <div class="swiper-button-prev"><i class="fas fa-chevron-circle-left"></i></div>
+   <div class="swiper-button-next"><i class="fas fa-chevron-circle-right ml-3"></i></div>
+</div>  
+
+<div>
+  <p>
+    タイトル<br><%= @plan.title %>
+    <%= link_to "編集", edit_plan_path(@plan) %>
+  </p>
+</div>
+
+<% @days.each do |day| %>
+<div>
+  <p>
+    日にち<br><%= day.number %>
+    <%= link_to "編集", edit_plan_day_path(@plan, day) %>
+  </p>
+  <p>
+    スケジュール<br>
+    <% day.schedules.each do |schedule| %>
+      <%= schedule.start_at.strftime('%H:%M') %> ~
+      <%= schedule.finished_at.strftime('%H:%M') %><br>
+      <%= schedule.place %>
+      <%= link_to "編集", edit_plan_day_schedule_path(@plan, day, schedule) %><br>
+    <% end %>
+  </p>
+</div>
+<% end %>

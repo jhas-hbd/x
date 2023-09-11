@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>X</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <div class="search_form">
+        <%= form_with url: search_path, local: true, method: :get do |f| %>
+          <%= f.select :prefecture, Plan.prefectures.keys, { include_blank: '都道府県'} %>
+          <%= f.select :stay_days, Plan.stay_days.keys, { include_blank: '宿泊日数'} %>
+          <%= f.select :budget, Plan.budgets.keys, { include_blank: '予算'} %>
+          <%= f.select :main_vehicle, Plan.main_vehicles.keys, { include_blank: '移動手段'} %>
+          <%= f.text_field :key_word, :placeholder => "キーワード" %>
+          <%= f.submit "検索" %>
+        <% end %>
+      </div>
+    </header>
+    <%= yield %>
+    <!--<script src="application.js"></script>-->
+  </body>
+</html>

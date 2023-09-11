@@ -1,0 +1,25 @@
+<h1>プラン一覧</h1>
+
+<div>
+  <% @plans.each do |plan| %>
+  <div>
+    
+    <% if plan.plan_images.attached? %>
+      <% plan.plan_images.each do |image| %>
+        <%= image_tag image, size: '200x200' %>
+      <% end %>
+    <% else %>
+      <p>画像がありません</p>
+    <% end %>
+    
+    <%= link_to plan_path(plan) do %>
+      <%= plan.title %>
+    <% end %>
+    <%= plan.prefecture %>
+    <%= plan.stay_days %>
+    <%= plan.budget %>
+    <%= plan.main_vehicle %>
+    <%= plan.impression %>
+  </div>
+  <% end %>
+</div>

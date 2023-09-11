@@ -1,0 +1,18 @@
+<h1>Homes#top</h1>
+<% if user_signed_in? %>
+  <li>
+    <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+  </li>
+  <li>
+    <%= link_to "Plan", new_plan_path %>
+  </li>
+<% else %>
+  <li>
+    <%= link_to "new", new_user_registration_path %>
+  </li>
+  <li>
+    <%= link_to "Log in", new_user_session_path %>
+  </li>
+<% end %>
+
+
